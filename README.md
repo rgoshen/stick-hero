@@ -2,6 +2,16 @@
 
 This project is a clone of the popular Stick Hero game, developed using HTML Canvas and vanilla JavaScript. The game challenges players to build the right length of stick to cross various gaps.
 
+- [Stick Hero Clone](#stick-hero-clone)
+  - [Getting Started](#getting-started)
+  - [Project Branches](#project-branches)
+  - [Usage](#usage)
+  - [Technologies Used](#technologies-used)
+  - [Contributing](#contributing)
+  - [License](#license)
+  - [Contact](#contact)
+  - [Acknowledgments](#acknowledgments)
+
 ## Getting Started
 
 To get started with the project, simple clone the repository and open the index.html file in your browser.
@@ -19,6 +29,14 @@ cd stick-hero
 ```
 
 3. Open `index.html` in your browser to start the game.
+
+## Project Branches
+
+- **main**: This is the primary branch of the project. It is protected and requires signed commits and pull requests for changes.
+- **build**: This branch is used to deploy the game to GitHub Pages. Changes here reflect directly on the live site.
+- **dev**: For development and feature additions. Contributors are welcome to fork the repository, create feature branches, and submit pull requests to this branch.
+
+Please note that the live version of the game is hosted on GitHub Pages and is built from the `build` branch.
 
 ## Usage
 

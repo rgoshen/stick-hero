@@ -1,6 +1,13 @@
 # Contributing to Stick Hero Game Clone
 
-First off, thank you for considering contributing to Stick Hero Game Clone! It's people like you that make it a great project.
+First off, thank you for considering contributing to Stick Hero Game Clone! It's people like you that make it a great project. We want to make contributing to this project as easy and transparent as possible.
+
+## Branches and Pull Requests
+
+- Please base your contributions on the `dev` branch.
+- After finishing your work, submit a pull request to merge your changes into `main`.
+- Ensure your commits are signed as this branch requires signed commits.
+- Pull requests will be reviewed before merging into `main`.
 
 ## How to Contribute
 
@@ -12,36 +19,55 @@ Contributions to this project can take various forms. Some of the ways you can h
 
 ## Getting Started
 
-1. **Fork the Repository**: Click the 'Fork' button at the top right of this page to create your copy of the repository.
+1. **Fork the Repository**:
 
-2. **Clone Your Fork**: Clone your fork to your local machine.
+   - Click the 'Fork' button at the top right of this page to create your copy of the repository.
+
+2. **Clone Your Fork**:
+
+   - Clone your fork to your local machine.
 
    ```bash
    git clone https://github.com/rgoshen/stick-hero
    cd stick-hero-clone
    ```
 
-3. **Create a Branch**: Create a new branch for your changes.
+3. **Create a New Branch**:
+
+   - Create a new branch from `dev` for your feature or bug fix.
 
    ```bash
    git checkout -b feature/my-new-feature
    ```
 
-4. **Make Your Changes**: Implement your changes, ensuring you adhere to the project's coding style and guidelines.
+4. **Make Your Changes**:
 
-5. **Commit Your Changes**: Commit your changes with a clear and descriptive commit message.
+- Implement your changes, ensuring you adhere to the project's coding style and guidelines.
 
-   ```bash
-   git commit -am 'Add some feature'
-   ```
+5. **Sign Your Commits**:
 
-6. **Push to Your Fork**: Push your changes to your fork on GitHub.
+- Make sure to sign your commits. [Here's how to sign commits](https://docs.github.com/en/authentication/managing-commit-signature-verification/signing-commits).
 
-   ```bash
-   git push origin feature/my-new-feature
-   ```
+6. **Commit Your Changes**:
 
-7. **Submit a Pull Request**: Go to the original repository and click the 'Compare & pull request' button to submit your changes for review.
+- Commit your changes with a clear and descriptive commit message.
+
+  ```bash
+  git commit -am 'Add some feature'
+  ```
+
+7. **Push to Your Fork**:
+
+- Push your changes to your fork on GitHub.
+
+  ```bash
+  git push origin feature/my-new-feature
+  ```
+
+8. **Submit a Pull Request**:
+
+- Push your changes to your fork and submit a pull request to the `main` branch.
+- Ensure your pull request details exactly what you changed and why.
 
 ## Reporting Bugs
 
