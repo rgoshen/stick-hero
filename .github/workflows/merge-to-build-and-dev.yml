@@ -21,12 +21,12 @@ jobs:
         run: |
           git fetch origin build
           git checkout build
-          git merge --ff-only origin/main
+          git merge --allow-unrelated-histories origin/main
           git push origin build
 
       - name: Merge to Dev Branch
         run: |
           git fetch origin dev
           git checkout dev
-          git merge --ff-only origin/main
+          git merge --allow-unrelated-histories origin/main
           git push origin dev
