@@ -11,13 +11,14 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-        with:
-          ref: main
+
+      - name: Configure Git
+        run: |
+          git config user.name "${{ github.actor }}"
+          git config user.email "${{ github.actor }}@users.noreply.github.com"
 
       - name: Merge to Build Branch
         run: |
-          git config --global user.name 'Your Name'
-          git config --global user.email 'your-email@example.com'
           git fetch origin build
           git checkout build
           git merge --ff-only origin/main
