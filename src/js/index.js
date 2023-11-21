@@ -62,3 +62,23 @@ window.addEventListener('mousedown', (e) => {});
 window.addEventListener('mouseup', (e) => {});
 
 function animate(timeStamp) {}
+
+function generatePlatform() {
+  const minimumGap = 40;
+  const maximumGap = 200;
+  const minimumWidth = 20;
+  const maximumWidth = 100;
+
+  // X coordinate of the right edge of the furthest platform
+  const lastPlatform = platforms[platforms.length - 1];
+  let furthestX = lastPlatform.x + lastPlatform.w;
+
+  const x =
+    furthestX +
+    minimumGap +
+    Math.floor(Math.random() * (maximumGap - minimumGap));
+  const w =
+    maximumWidth + Math.floor(Math.random() * (maximumWidth - minimumWidth));
+
+  platforms.push({ x, w });
+}
