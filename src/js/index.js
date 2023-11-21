@@ -122,3 +122,23 @@ function drawHero() {
     heroHeight,
   );
 }
+
+function drawSticks() {
+  sticks.forEach((stick) => {
+    ctx.save();
+
+    // Move the anchor point to the start of the stick and rotate
+    ctx.translate(stick.x, canvasHeight - platformHeight);
+    ctx.rotate((Math.PI / 180) * stick.rotation);
+
+    // Draw stick
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(0, 0);
+    ctx.lineTo(0, -stick.length);
+    ctx.stroke();
+
+    // Restore transformations
+    ctx.restore();
+  });
+}
