@@ -12,7 +12,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
         with: 
-          token:${{secrets.GH_ACTIONS_GITHUB_TOKEN}}
+          repo-token: ${{ secrets.GH_ACTIONS_GITHUB_TOKEN }}
 
       - name: Configure Git
         run: |
