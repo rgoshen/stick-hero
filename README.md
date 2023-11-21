@@ -62,3 +62,4 @@ For any queries, please contact <rick.goshen@gmail.com>.
 ## Acknowledgments
 
 - Thanks to the original Stick Hero game for inspiration.
+- Thanks to Hunor Márton Borbély for the example on FreeCodeCamp.
