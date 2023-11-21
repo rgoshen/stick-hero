@@ -3,12 +3,10 @@ let phase = 'waiting'; // waiting | stretching | turning | walking | transitioni
 let lastTimestamp;
 let heroX;
 let heroY;
-let screenOffset;
+let sceneOffset;
 let platforms = [];
 let sticks = [];
 let score = 0;
-
-// Configuration
 
 // Getting the canvas element
 const canvas = document.getElementById('game');
@@ -19,6 +17,11 @@ const ctx = canvas.getContext('2d');
 // Further UI elements
 const scoreElement = document.getElementById('score');
 const restartButton = document.getElementById('restart');
+
+// Configuration
+const canvasWidth = 375;
+const canvasHeight = 375;
+const platformHeight = 100;
 
 // Start game
 resetGame();
@@ -41,7 +44,7 @@ function resetGame() {
   heroY = 0;
 
   // By how much should we shift the screen back
-  screenOffset = 0;
+  sceneOffset = 0;
 
   // There's always a stick, even if it appears to be invisible
   sticks = [{ x: platforms[0].x + platforms[0].w, length: 0, rotation: 0 }];
@@ -56,7 +59,23 @@ function resetGame() {
   draw();
 }
 
-function draw() {}
+function draw() {
+  ctx.clearRest(0, 0, canvasWidth, canvasHeight);
+
+  // Save the current transformation
+  ctx.save();
+
+  // Shifting the view
+  ctx.translate(-sceneOffset, 0);
+
+  // Draw the scene
+  drawPlatforms();
+  drawHero();
+  drawSticks();
+
+  // Restore transformation to the last save
+  ctx.restore();
+}
 
 window.addEventListener('mousedown', (e) => {});
 window.addEventListener('mouseup', (e) => {});
@@ -81,4 +100,12 @@ function generatePlatform() {
     maximumWidth + Math.floor(Math.random() * (maximumWidth - minimumWidth));
 
   platforms.push({ x, w });
+}
+
+function drawPlatforms() {
+  platforms.forEach(({ x, w }) => {
+    // Draw platform
+    ctx.fillStyle = 'black';
+    ctx.fillRect(x, canvasHeight - platformHeight, w, platformHeight);
+  });
 }
