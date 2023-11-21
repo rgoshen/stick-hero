@@ -109,3 +109,16 @@ function drawPlatforms() {
     ctx.fillRect(x, canvasHeight - platformHeight, w, platformHeight);
   });
 }
+
+function drawHero() {
+  const heroWidth = 20;
+  const heroHeight = 30;
+
+  ctx.fillStyle = 'red';
+  ctx.fillRect(
+    heroX,
+    heroY + canvasHeight - platformHeight - heroHeight,
+    heroWidth,
+    heroHeight,
+  );
+}
