@@ -1,22 +1,19 @@
 html,
 body {
   height: 100%;
+  margin: 0;
 }
 
-body,
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  cursor: pointer;
+}
+
 .container {
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.container {
-  position: relative;
-  font-family: Helvetica;
-}
-
-canvas {
-  border: 1px solid;
+  height: 100%;
 }
 
 #score {
@@ -27,7 +24,24 @@ canvas {
   font-weight: 900;
 }
 
+#introduction {
+  width: 200px;
+  height: 150px;
+  position: absolute;
+  font-weight: 600;
+  font-size: 0.8em;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-align: center;
+  transition: opacity 2s;
+}
+
 #restart {
   position: absolute;
   display: none;
+}
+
+#perfect {
+  position: absolute;
+  opacity: 0;
+  transition: opacity 2s;
 }
