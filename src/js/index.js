@@ -22,6 +22,11 @@ const restartButton = document.getElementById('restart');
 const canvasWidth = 375;
 const canvasHeight = 375;
 const platformHeight = 100;
+const stretchingSpeed = 4; // Milliseconds it takes to draw a pixel
+const turningSpeed = 4; // Milliseconds it takes to turn a degree
+const walkingSpeed = 4;
+const transitioningSpeed = 2;
+const fallingSpeed = 2;
 
 // Start game
 resetGame();
@@ -57,6 +62,10 @@ function resetGame() {
   scoreElement.innerText = score;
 
   draw();
+
+  lastTimestamp = timestamp;
+
+  window.requestAnimationFrame(animate);
 }
 
 function draw() {
@@ -96,7 +105,93 @@ restartButton.addEventListener('click', function (event) {
   restartButton.style.display = 'none';
 });
 
-function animate(timeStamp) {}
+function animate(timeStamp) {
+  if (!lastTimestamp) {
+    // First cycle
+    lastTimestamp = timestamp;
+    window.requestAnimationFrame(animate);
+    return;
+  }
+
+  let timePassed = timestamp - lastTimestamp;
+
+  switch (phase) {
+    case 'waiting':
+      return; // Stop the loop
+    case 'stretching': {
+      sticks[sticks.length - 1].length += timePassed / stretchingSpeed;
+      break;
+    }
+    case 'turning': {
+      sticks[sticks.length - 1].rotation += timePassed / turningSpeed;
+
+      if (sticks[sticks.length - 1].rotation >= 90) {
+        sticks[sticks.length - 1].rotation = 90;
+
+        const nextPlatform = thePlatformTheStickHits();
+        if (nextPlatform) {
+          score++;
+          scoreElement.innerText = score;
+
+          generatePlatform();
+        }
+
+        phase = 'walking';
+      }
+      break;
+    }
+    case 'walking': {
+      heroX += timePassed / walkingSpeed;
+
+      const nextPlatform = thePlatformTheStickHits();
+      if (nextPlatform) {
+        // If the hero will reach another platform then limit its position at its edge
+        const maxHeroX = nextPlatform.x + nextPlatform.w - 30;
+        if (heroX > maxHeroX) {
+          heroX = maxHeroX;
+          phase = 'transitioning';
+        }
+      } else {
+        // If the hero won't reach another platform then limit its position at the end of the pole
+        const maxHeroX =
+          sticks[sticks.length - 1].x + sticks[sticks.length - 1].length;
+        if (heroX > maxHeroX) {
+          heroX = maxHeroX;
+          phase = 'falling';
+        }
+      }
+      break;
+    }
+    case 'transitioning': {
+      sceneOffset += timePassed / transitioningSpeed;
+
+      const nextPlatform = thePlatformTheStickHits();
+      if (nextPlatform.x + nextPlatform.w - sceneOffset < 100) {
+        sticks.push({
+          x: nextPlatform.x + nextPlatform.w,
+          length: 0,
+          rotation: 0,
+        });
+        phase = 'waiting';
+      }
+      break;
+    }
+    case 'falling': {
+      heroY += timePassed / fallingSpeed;
+
+      if (sticks[sticks.length - 1].rotation < 180) {
+        sticks[sticks.length - 1].rotation += timePassed / turningSpeed;
+      }
+
+      const maxHeroY = platformHeight + 100;
+      if (heroY > maxHeroY) {
+        restartButton.style.display = 'block';
+        return;
+      }
+      break;
+    }
+  }
+}
 
 function generatePlatform() {
   const minimumGap = 40;
@@ -157,4 +252,15 @@ function drawSticks() {
     // Restore transformations
     ctx.restore();
   });
+}
+
+function thePlatformTheStickHits() {
+  const lastStick = sticks[sticks.length - 1];
+  const stickFarX = lastStick.x + lastStick.length;
+
+  const platformTheStickHits = platforms.find(
+    (platform) => platform.x < stickFarX && stickFarX < platform.x + platform.w,
+  );
+
+  return platformTheStickHits;
 }
