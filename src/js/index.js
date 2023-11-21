@@ -77,8 +77,24 @@ function draw() {
   ctx.restore();
 }
 
-window.addEventListener('mousedown', (e) => {});
-window.addEventListener('mouseup', (e) => {});
+window.addEventListener('mousedown', (e) => {
+  if (phase == 'waiting') {
+    phase = 'stretching';
+    lastTimestamp = undefined;
+    window.requestAnimationFrame(animate);
+  }
+});
+
+window.addEventListener('mouseup', (e) => {
+  if (phase == 'stretching') {
+    phase = 'turning';
+  }
+});
+
+restartButton.addEventListener('click', function (event) {
+  resetGame();
+  restartButton.style.display = 'none';
+});
 
 function animate(timeStamp) {}
 
