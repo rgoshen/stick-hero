@@ -1,0 +1,34 @@
+name: Merge to Build and Dev Branches
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  merge-branches:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with: 
+          token: ${{ secrets.ACCESS_TOKEN }}
+
+      - name: Configure Git
+        run: |
+          git config user.name "${{ github.actor }}"
+          git config user.email "${{ github.actor }}@users.noreply.github.com"
+
+      - name: Merge to Build Branch
+        run: |
+          git fetch origin build
+          git checkout build
+          git merge --allow-unrelated-histories origin/main
+          git push origin build
+
+      - name: Merge to Dev Branch
+        run: |
+          git fetch origin dev
+          git checkout dev
+          git merge --allow-unrelated-histories origin/main
+          git push origin dev
